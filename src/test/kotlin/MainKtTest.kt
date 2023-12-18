@@ -53,16 +53,43 @@ class MainKtTest {
     fun `Should throw an error if input file exists and has a syntax error`() {
         val fsMock = object : FileSystem {
             override fun doesFileExist(filePaths: String): Boolean = true
-            override fun readFileAsString(filePaths: String): String {
-                throw RuntimeException("Syntax error")
-            }
+            override fun readFileAsString(filePaths: String): String = "Wrong input file body"
         }
 
         mainHandler(arrayOf("input.txt"), output, fsMock)
 
         assertEquals(1, messages.size)
-        assertEquals(Messages.fileSyntaxError, messages[0])
+        assertEquals(Messages.inputFileContainsWrongData, messages[0])
     }
 
+    @Test
+    fun `Should print result field`() {
+        val fsMock = object : FileSystem {
+            override fun doesFileExist(filePaths: String): Boolean = true
+            override fun readFileAsString(filePaths: String): String = """
+                ..p.....
+                .ppp....
+                ..p.....
+                ........
+                ...#....
+                ...#...#
+                #..#####
+            """.trimIndent()
+        }
 
+        mainHandler(arrayOf("input.txt"), output, fsMock)
+
+        assertEquals(1, messages.size)
+
+        val resultField = """
+            ........
+            ........
+            ..p.....
+            .ppp....
+            ..p#....
+            ...#...#
+            #..#####
+        """.trimIndent();
+        assertEquals(resultField, messages[0])
+    }
 }

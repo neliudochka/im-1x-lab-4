@@ -25,6 +25,19 @@ fun mainHandler(args: Array<String>, output: MainOutput, fs: FileSystem) {
         output.printLine(Messages.inputFileDoesNotExist)
         return
     }
+
+    val field = try {
+        stringToField(fs.readFileAsString(args[0]))
+    } catch (e: Exception) {
+        null
+    }
+
+    if (field == null) {
+        output.printLine(Messages.inputFileContainsWrongData)
+    } else {
+        val resField = Tetris.play(field);
+        output.printLine(fieldToString(resField))
+    }
 }
 
 object Messages {
@@ -37,7 +50,7 @@ object Messages {
         The file you passed does not exist
     """.trimIndent()
 
-    val fileSyntaxError = """
-        There is syntax error in your input file.
+    val inputFileContainsWrongData = """
+        Wrong data!
     """.trimIndent()
 }
