@@ -7,6 +7,13 @@ fun main(args: Array<String>) {
             println(msg)
         }
     }
+
+    val fs = object : FileSystem {
+        override fun doesFileExist(filePaths: String): Boolean = File(filePaths).exists()
+        override fun readFileAsStringList(filePaths: String): List<String> = File(filePaths).readLines().toList()
+    }
+
+    mainHandler(args, output, fs);
 }
 
 interface MainOutput {
