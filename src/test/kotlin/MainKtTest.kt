@@ -15,7 +15,7 @@ class MainKtTest {
             throw RuntimeException("Unexpected call of doesFileExist method")
         }
 
-        override fun readFileAsString(filePaths: String): String {
+        override fun readFileAsStringList(filePaths: String): List<String> {
             throw RuntimeException("Unexpected call of readFileAsString method")
         }
     }
@@ -38,7 +38,7 @@ class MainKtTest {
     fun `Should return message if an input file does not exist`() {
         val fsMock = object : FileSystem {
             override fun doesFileExist(filePaths: String): Boolean = false
-            override fun readFileAsString(filePaths: String): String {
+            override fun readFileAsStringList(filePaths: String): List<String> {
                 throw RuntimeException("Unexpected call of readFileAsString method")
             }
         }
@@ -53,7 +53,10 @@ class MainKtTest {
     fun `Should throw an error if input file exists and has a syntax error`() {
         val fsMock = object : FileSystem {
             override fun doesFileExist(filePaths: String): Boolean = true
-            override fun readFileAsString(filePaths: String): String = "Wrong input file body"
+            override fun readFileAsStringList(filePaths: String): List<String> = """
+                Wrong data
+                Wrong data
+            """.trimIndent().lines()
         }
 
         mainHandler(arrayOf("input.txt"), output, fsMock)
@@ -66,7 +69,8 @@ class MainKtTest {
     fun `Should print result field`() {
         val fsMock = object : FileSystem {
             override fun doesFileExist(filePaths: String): Boolean = true
-            override fun readFileAsString(filePaths: String): String = """
+            override fun readFileAsStringList(filePaths: String): List<String> = """
+                7 8
                 ..p.....
                 .ppp....
                 ..p.....
@@ -74,7 +78,7 @@ class MainKtTest {
                 ...#....
                 ...#...#
                 #..#####
-            """.trimIndent()
+            """.trimIndent().lines()
         }
 
         mainHandler(arrayOf("input.txt"), output, fsMock)

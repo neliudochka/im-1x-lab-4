@@ -1,5 +1,7 @@
+import java.io.File
+
 fun main(args: Array<String>) {
-    println("Hello World!")
+
     val output = object : MainOutput {
         override fun printLine(msg: String) {
             println(msg)
@@ -13,7 +15,7 @@ interface MainOutput {
 
 interface FileSystem {
     fun doesFileExist(filePaths: String): Boolean
-    fun readFileAsString(filePaths: String): String
+    fun readFileAsStringList(filePaths: String): List<String>
 }
 fun mainHandler(args: Array<String>, output: MainOutput, fs: FileSystem) {
     if (args.isEmpty()) {
@@ -27,7 +29,7 @@ fun mainHandler(args: Array<String>, output: MainOutput, fs: FileSystem) {
     }
 
     val field = try {
-        stringToField(fs.readFileAsString(args[0]))
+        stringToField(fs.readFileAsStringList(args[0]))
     } catch (e: Exception) {
         null
     }

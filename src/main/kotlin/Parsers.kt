@@ -1,4 +1,4 @@
-fun stringToField(str: String): Field {
+fun stringToField(str: List<String>): Field {
     return object : Field {}
 }
 
