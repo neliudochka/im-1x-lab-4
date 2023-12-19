@@ -44,8 +44,8 @@ fun mainHandler(args: Array<String>, output: MainOutput, fs: FileSystem) {
     if (field == null) {
         output.printLine(Messages.inputFileContainsWrongData)
     } else {
-        val resField = Tetris.play(field);
-        output.printLine(fieldToString(resField))
+        val fields = Tetris.playMultipleFields(field);
+        fields.map { f -> output.printLine(fieldToString(f) + "\n")}
     }
 }
 
