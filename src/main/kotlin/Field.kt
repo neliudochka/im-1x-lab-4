@@ -24,9 +24,6 @@ data class Field(private val height: Int, private val width: Int, private val fi
             return true
         for (point in figure) {
             val neighbors = figure.filter { it.isNeighbor(point) }
-            println(point)
-            println("=")
-            println(neighbors)
             if (neighbors.isEmpty()) {
                 println(neighbors)
                 return false

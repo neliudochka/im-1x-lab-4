@@ -56,7 +56,6 @@ class ParsersKtTest {
         val exception = assertFailsWith<RuntimeException> {
             stringToField(list)
         }
-        println(exception)
 
         assertEquals(expectedExc, exception.message)
     }
@@ -70,7 +69,6 @@ class ParsersKtTest {
         val exception = assertFailsWith<RuntimeException> {
             stringToField(list)
         }
-        println(exception)
 
         assertEquals(expectedExc, exception.message)
     }
@@ -84,7 +82,6 @@ class ParsersKtTest {
         val exception = assertFailsWith<RuntimeException> {
             stringToField(list)
         }
-        println(exception)
 
         assertEquals(expectedExc, exception.message)
     }
@@ -99,7 +96,6 @@ class ParsersKtTest {
         val exception = assertFailsWith<RuntimeException> {
             stringToField(list)
         }
-        println(exception)
 
         assertEquals(expectedExc, exception.message)
     }
@@ -113,7 +109,6 @@ class ParsersKtTest {
         val exception = assertFailsWith<RuntimeException> {
             stringToField(list)
         }
-        println(exception)
 
         assertEquals(expectedExc, exception.message)
     }
