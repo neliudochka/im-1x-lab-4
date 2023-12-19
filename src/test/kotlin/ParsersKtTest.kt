@@ -127,13 +127,124 @@ class ParsersKtTest {
         val figure = mutableSetOf(Point(0, 2), Point(1, 1))
         val landscape = mutableSetOf(Point(0, 3), Point(1, 2))
 
-        val expectedField = Field(2, 4, figure, landscape)
         val actualField = stringToField(list)
+        val expectedField = Field(2, 4, figure, landscape)
 
         assertEquals(expectedField, actualField)
     }
 
     @Test
-    fun fieldToString() {
+    fun `Should return expected string when no figure`() {
+        val field = Field(
+            2,
+            3,
+            setOf(),
+            setOf(Point(0, 1), Point(1, 0))
+        )
+
+        val expectedResult = """
+            .#.
+            #..
+        """.trimIndent()
+
+        val actualResult = fieldToString(field)
+
+        assertEquals(expectedResult, actualResult)
+    }
+
+    @Test
+    fun `Should return expected string when no landscape`() {
+        val field = Field(
+            2,
+            3,
+            setOf(Point(0, 1), Point(1, 1), Point(2, 0)),
+            setOf()
+        )
+
+        val expectedResult = """
+            ..p
+            pp.
+        """.trimIndent()
+
+        val actualResult = fieldToString(field)
+
+        assertEquals(expectedResult, actualResult)
+    }
+
+    @Test
+    fun `Should return expected string when no figure and landscape`() {
+        val field = Field(
+            2,
+            3,
+            setOf(),
+            setOf()
+        )
+
+        val expectedResult = """
+            ...
+            ...
+        """.trimIndent()
+
+        val actualResult = fieldToString(field)
+
+        assertEquals(expectedResult, actualResult)
+    }
+
+    @Test
+    fun `Should return expected string for small field`() {
+        val field = Field(
+            2,
+            3,
+            setOf(Point(1, 0), Point(1, 1)),
+            setOf(Point(0, 0), Point(0, 1), Point(2, 1))
+        )
+
+        val expectedResult = """
+            #p.
+            #p#
+        """.trimIndent()
+
+        val actualResult = fieldToString(field)
+
+        assertEquals(expectedResult, actualResult)
+    }
+
+    @Test
+    fun `Should return expected string`() {
+        val field = Field(
+            7,
+            8,
+            setOf(
+                Point(2, 2),
+                Point(1, 3),
+                Point(2, 3),
+                Point(3, 3),
+                Point(2, 4)),
+            setOf(
+                Point(3, 4),
+                Point(3, 5),
+                Point(7, 5),
+                Point(0, 6),
+                Point(3, 6),
+                Point(4, 6),
+                Point(5, 6),
+                Point(6, 6),
+                Point(7, 6)
+            )
+        )
+
+        val expectedResult = """
+            ........
+            ........
+            ..p.....
+            .ppp....
+            ..p#....
+            ...#...#
+            #..#####
+        """.trimIndent()
+
+        val actualResult = fieldToString(field)
+
+        assertEquals(expectedResult, actualResult)
     }
 }
