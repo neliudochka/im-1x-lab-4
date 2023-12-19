@@ -35,6 +35,8 @@ fun mainHandler(args: Array<String>, output: MainOutput, fs: FileSystem) {
         return
     }
 
+    val printEachStep = args.size > 1 && args[1] == "-printEachStep"
+
     val field = try {
         stringToField(fs.readFileAsStringList(args[0]))
     } catch (e: Exception) {
@@ -44,8 +46,14 @@ fun mainHandler(args: Array<String>, output: MainOutput, fs: FileSystem) {
     if (field == null) {
         output.printLine(Messages.inputFileContainsWrongData)
     } else {
-        val fields = Tetris.playMultipleFields(field);
-        fields.map { f -> output.printLine(fieldToString(f) + "\n")}
+        if (printEachStep) {
+            Tetris.playMultipleFields(field)
+                .mapIndexed { index, stepField -> "STEP $index\n${fieldToString(stepField)}\n" }
+                .forEach { output.printLine(it) }
+        } else {
+            val resField = Tetris.play(field);
+            output.printLine(fieldToString(resField))
+        }
     }
 }
 
