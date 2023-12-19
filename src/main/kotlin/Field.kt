@@ -3,10 +3,10 @@ interface FieldInterface {
     fun nextStep(): Field
 }
 
-class Point(var x: Int,
+data class Point(var x: Int,
             var y: Int)
 
-class Field(private val height: Int, private val width: Int, private val figure: Set<Point>, private val landscape: Set<Point>) : FieldInterface {
+data class Field(private val height: Int, private val width: Int, private val figure: Set<Point>, private val landscape: Set<Point>) : FieldInterface {
     init {
         validateSize()
     }
