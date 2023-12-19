@@ -10,5 +10,9 @@ class Tetris {
             }
             return finalField
         }
+
+        fun playMultipleFields(field: Field): List<Field> {
+            return listOf(field)
+        }
     }
 }
