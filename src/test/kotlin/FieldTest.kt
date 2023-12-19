@@ -108,4 +108,106 @@ class FieldTest {
         val sameField = field.nextStep()
         assertSame(field, sameField)
     }
+
+    //check if there is only one figure
+    @Test
+    fun `Should create fields if there is one figure`() {
+        val figure = setOf(
+            Point(2, 2),
+            Point(1, 3), Point(2, 3), Point(3, 3),
+            Point(2, 4)
+        )
+        val field = assertDoesNotThrow() {
+            Field(
+                7,
+                8,
+                figure,
+                setOf(
+                    Point(3, 4),
+                    Point(3, 5), Point(7, 5),
+                    Point(0, 6),
+                    Point(3, 6), Point(4, 6), Point(5, 6), Point(6, 6), Point(7, 6)
+                )
+            )
+
+        }
+
+        assertEquals(figure, field.getFigure())
+    }
+
+    @Test
+    fun `Should throw an error if there is more that one figure`() {
+        val figure = setOf(
+            Point(2, 2),
+            Point(1, 3), Point(2, 3), Point(3, 3),
+            Point(2, 4),
+            Point(0,0)
+        )
+
+        val exception = assertThrows<IllegalArgumentException> {
+            Field(
+                7,
+                8,
+                figure,
+                setOf(
+                    Point(3, 4),
+                    Point(3, 5), Point(7, 5),
+                    Point(0, 6),
+                    Point(3, 6), Point(4, 6), Point(5, 6), Point(6, 6), Point(7, 6)
+                )
+            )
+
+        }
+
+        assertEquals("In field must be only one figure", exception.message)
+    }
+
+    @Test
+    fun `Should create field if there is one figure from one point`() {
+        val field = assertDoesNotThrow() {
+            Field(
+                2,
+                2,
+                setOf(Point(0,0)),
+                emptySet()
+            )
+        }
+
+        assertEquals(setOf(Point(0,0)), field.getFigure())
+    }
+
+    @Test
+    fun `Should create field if there are no figures`() {
+        val field = assertDoesNotThrow() {
+            Field(
+                2,
+                2,
+                emptySet(),
+                emptySet()
+            )
+        }
+
+        assertEquals(setOf<Point>(), field.getFigure())
+    }
+
+    @Test
+    fun `Should throw an exception if points are diagonal`() {
+        val figure = setOf(
+            Point(0, 0),
+            Point(1, 1)
+        )
+
+        val exception = assertThrows<IllegalArgumentException> {
+            Field(
+                3,
+                3,
+                figure,
+                emptySet()
+            )
+
+        }
+
+        assertEquals("In field must be only one figure", exception.message)
+    }
+
 }

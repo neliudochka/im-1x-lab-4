@@ -4,13 +4,20 @@ data class Point(var x: Int,
 data class Field(private val height: Int, private val width: Int, private val figure: Set<Point>, private val landscape: Set<Point>) {
     init {
         validateSize()
+        validateFigure()
     }
 
+    private fun validateFigure() {
+        require(onlyOneFigure()) {"In field must be only one figure"}
+    }
+
+    private fun onlyOneFigure() : Boolean {
+        return true
+    }
     private fun validateSize() {
         require(width > 0) { "Width must be greater than 0" }
         require(height > 0) { "Height must be greater than 0" }
     }
-
     fun getHeight() : Int {
         return height
     }
