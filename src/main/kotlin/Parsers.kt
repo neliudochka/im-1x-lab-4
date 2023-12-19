@@ -47,5 +47,23 @@ fun stringToField(str: List<String>): Field {
 }
 
 fun fieldToString(field: Field): String {
-    return ""
+    val stringBuilder = StringBuilder()
+
+    for (y in 0 until field.getHeight()) {
+        for (x in 0 until field.getWidth()) {
+            val point = Point(x, y)
+            val checkCoords = field.getFigure().any { it.x == point.x && it.y == point.y }
+
+            if (checkCoords) {
+                stringBuilder.append('p')
+            } else if (point in field.getLandscape()) {
+                stringBuilder.append('#')
+            } else {
+                stringBuilder.append('.')
+            }
+        }
+        stringBuilder.append('\n')
+    }
+
+    return stringBuilder.toString().trim()
 }
