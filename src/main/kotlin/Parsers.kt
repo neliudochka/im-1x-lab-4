@@ -3,7 +3,7 @@ fun stringToField(str: List<String>): Field {
         throw RuntimeException("File cannot be empty or contain only one row.")
     }
 
-    val size = str[0].split(' ');
+    val size = str[0].split(' ')
 
     if (size.size != 2) {
         throw RuntimeException("First row should contain two size values.")
@@ -33,9 +33,9 @@ fun stringToField(str: List<String>): Field {
     for (i: Int in field.indices) {
         for (j: Int in field[i].indices) {
             when (field[i][j]) {
-                '.' -> continue;
-                '#' -> landscape.add(Point(i, j));
-                'p' -> figure.add(Point(i, j));
+                '.' -> continue
+                '#' -> landscape.add(Point(j, i))
+                'p' -> figure.add(Point(j, i))
                 else -> {
                     throw RuntimeException("Field should contain only .p#")
                 }
@@ -43,7 +43,7 @@ fun stringToField(str: List<String>): Field {
         }
     }
 
-    return Field(height, width, figure, landscape);
+    return Field(height, width, figure, landscape)
 }
 
 fun fieldToString(field: Field): String {

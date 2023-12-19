@@ -124,8 +124,8 @@ class ParsersKtTest {
         list.add("..p#")
         list.add(".p#.")
 
-        val figure = mutableSetOf(Point(0, 2), Point(1, 1))
-        val landscape = mutableSetOf(Point(0, 3), Point(1, 2))
+        val figure = mutableSetOf(Point(2, 0), Point(1, 1))
+        val landscape = mutableSetOf(Point(3, 0), Point(2, 1))
 
         val actualField = stringToField(list)
         val expectedField = Field(2, 4, figure, landscape)
