@@ -10,5 +10,22 @@ class Tetris {
             }
             return finalField
         }
+        fun playMultipleFields(field: Field): List<Field> {
+            val fieldsList = mutableListOf<Field>()
+            var currentField = field
+
+            while (true) {
+                fieldsList.add(currentField)
+                val nextField = currentField.nextStep()
+
+                if (currentField == nextField) {
+                    break
+                }
+
+                currentField = nextField
+            }
+
+            return fieldsList
+        }
     }
 }
