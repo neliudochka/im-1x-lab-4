@@ -122,10 +122,10 @@ class ParsersKtTest {
     fun `Should return Field object with specific parameters`() {
         list.add("2 4")
         list.add("..p#")
-        list.add(".p#.")
+        list.add(".pp.")
 
-        val figure = mutableSetOf(Point(2, 0), Point(1, 1))
-        val landscape = mutableSetOf(Point(3, 0), Point(2, 1))
+        val figure = mutableSetOf(Point(2, 0), Point(1, 1), Point(2, 1))
+        val landscape = mutableSetOf(Point(3, 0))
 
         val actualField = stringToField(list)
         val expectedField = Field(2, 4, figure, landscape)
@@ -157,12 +157,12 @@ class ParsersKtTest {
         val field = Field(
             2,
             3,
-            setOf(Point(0, 1), Point(1, 1), Point(2, 0)),
+            setOf(Point(0, 1), Point(1, 1), Point(1, 0)),
             setOf()
         )
 
         val expectedResult = """
-            ..p
+            .p.
             pp.
         """.trimIndent()
 

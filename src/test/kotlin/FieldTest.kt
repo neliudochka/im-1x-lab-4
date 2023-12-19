@@ -7,7 +7,7 @@ class FieldTest {
     //constructor
     @Test
     fun `Should create Field obj if arguments are correct`() {
-        val figures = setOf(Point(1, 1), Point(2, 2))
+        val figures = setOf(Point(1, 1), Point(1, 2))
         val landscape = setOf(Point(3, 3), Point(4, 4))
 
         val field = assertDoesNotThrow() {
@@ -39,7 +39,7 @@ class FieldTest {
     //copy
     @Test
     fun `Should create a copy of the Field object`() {
-        val originalFigure = setOf(Point(1, 1), Point(2, 2))
+        val originalFigure = setOf(Point(1, 1), Point(1, 2))
         val originalLandscape = setOf(Point(3, 3), Point(4, 4))
         val originalField = Field(5, 6, originalFigure, originalLandscape)
 
@@ -64,7 +64,7 @@ class FieldTest {
     //move
     @Test
     fun `Should return field with figure moved by one step if there is space`() {
-        val originalFigure = setOf(Point(1, 1), Point(2, 2))
+        val originalFigure = setOf(Point(1, 1), Point(1, 2))
         val originalLandscape = setOf(Point(4, 4), Point(4, 4))
         val field = Field(4, 6, originalFigure, originalLandscape)
 
@@ -77,7 +77,7 @@ class FieldTest {
 
     @Test
     fun `Should not move figure when it reaches the bottom`() {
-        val originalFigure = setOf(Point(1, 4), Point(2, 4), Point(3, 3))
+        val originalFigure = setOf(Point(1, 4), Point(2, 4), Point(3, 4))
         val field = Field(5, 6, originalFigure, emptySet())
 
         val newField = field.nextStep()
@@ -209,5 +209,4 @@ class FieldTest {
 
         assertEquals("In field must be only one figure", exception.message)
     }
-
 }

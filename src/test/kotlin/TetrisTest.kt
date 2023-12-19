@@ -7,29 +7,29 @@ class TetrisTest {
         val field = Field(
             5,
             5,
-            setOf(Point(2, 0), Point(3, 1)),
+            setOf(Point(2, 0), Point(2, 1)),
             setOf(Point(2, 4))
         )
 
         val finalField = Tetris.play(field)
 
-        assertEquals(Point(2, 3), finalField.getFigure().first())
-        assertEquals(Point(3, 4), finalField.getFigure().last())
+        assertEquals(Point(2, 2), finalField.getFigure().first())
+        assertEquals(Point(2, 3), finalField.getFigure().last())
     }
 
     @Test
-    fun `Should move figure till the bottom of field if there is no landskape`() {
+    fun `Should move figure till the bottom of field if there is no landscape`() {
         val field = Field(
             6,
             6,
-            setOf(Point(2, 0), Point(3, 1), Point(3, 2), Point(4, 1)),
+            setOf(Point(2, 0), Point(3, 0), Point(3, 1), Point(4, 1)),
             emptySet()
         )
 
         val finalField = Tetris.play(field)
 
-        assertEquals(setOf(Point(2, 3), Point(3, 4), Point(3, 5), Point(4, 4))
-            , finalField.getFigure())
+        assertEquals(setOf(Point(2, 4), Point(3, 4), Point(3, 5), Point(4, 5)),
+            finalField.getFigure())
     }
 
     @Test
@@ -37,13 +37,13 @@ class TetrisTest {
         val field = Field(
             4,
             5,
-            setOf(Point(2, 0), Point(3, 1), Point(3, 2), Point(4, 1)),
+            setOf(Point(2, 0), Point(2, 1), Point(2, 2), Point(3, 2)),
             setOf(Point(0, 3), Point(1, 3), Point(2, 3), Point(3, 3), Point(4, 3))
         )
 
         val finalField = Tetris.play(field)
 
-        assertEquals(setOf(Point(2, 0), Point(3, 1), Point(3, 2), Point(4, 1))
+        assertEquals(setOf(Point(2, 0), Point(2, 1), Point(2, 2), Point(3, 2))
             , finalField.getFigure())
     }
 
