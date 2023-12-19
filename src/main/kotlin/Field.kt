@@ -1,12 +1,7 @@
-interface FieldInterface {
-    //повертає помилку, якщо не може рухатися
-    fun nextStep(): Field
-}
-
 data class Point(var x: Int,
             var y: Int)
 
-data class Field(private val height: Int, private val width: Int, private val figure: Set<Point>, private val landscape: Set<Point>) : FieldInterface {
+data class Field(private val height: Int, private val width: Int, private val figure: Set<Point>, private val landscape: Set<Point>) {
     init {
         validateSize()
     }
@@ -57,7 +52,7 @@ data class Field(private val height: Int, private val width: Int, private val fi
 
     //returns newField if there is place to move
     //returns same field, if it is not
-    override fun nextStep() : Field {
+    fun nextStep() : Field {
         if(!figureCanMove()) {
             return this;
         }

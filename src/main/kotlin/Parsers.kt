@@ -46,6 +46,6 @@ fun stringToField(str: List<String>): Field {
     return Field(height, width, figure, landscape);
 }
 
-fun fieldToString(field: FieldInterface): String {
+fun fieldToString(field: Field): String {
     return ""
 }
